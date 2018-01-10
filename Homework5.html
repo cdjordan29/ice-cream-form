@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <!--
+    ITEC225 Assignment 5 
+    <author> Christopher Daniel Jordan
+	<filename> Homework5.html
+	<date> 3/31/16
+     -->
+
+ <head><title>Gillians Ice Cream</title>
+       <meta charset="utf-8" />
+
+
+   <style type="text/css">
+    
+      body   {margin-left:50px;
+              margin-right:50px;
+              font-size:16pt;
+              font-weight:bold;
+             }
+      h3     {border-style:solid; text-align: center;}
+     
+      th  {font-weight:bold;
+              font-size: 20px;
+              padding:0.50em;
+              border-style:solid; border-color:darkBlue; border-width:0.2em;
+              background-color: beige;
+		   color: purple;
+		   text-align: left;
+             }
+	td  {
+              font-size: 18px;
+              padding: 0.50em;
+              border-style: solid; border-color:darkBlue; border-width: 0.2em;
+              background-color: beige;
+		   color: darkBlue;
+		   text-align: left;
+             }
+	.red { color: red; font-size: 1.2em; text-decoration: underline;}
+      caption {font-weight:bold; padding:0.5em; border-style:solid;
+               border-color: darkBlue; border-width:0.1em; background-color: lavender;
+		    color: darkBlue;}
+      #outp     {background-color:lavender; width:20em; margin: auto;}
+      table {border-collapse:collapse;border-style:solid;border-color:purple;border-width:0.2em;}
+   </style>
+  
+   <script type="text/javascript" > 
+		
+			
+		function chkName()
+		{
+			var name = document.getElementById("fn");
+			//testing the format of the name
+			//name can only be alphabetic and 10 chars long
+			var namePos = name.value.search(/^[A-Z][a-z]+$/);
+			if(namePos != 0)
+			{
+				alert("The you entered (" + name.value + ") is not in the correct form. \n"
+					+ "The correct form is all alphabetic, no more than 10 letters \n" 
+					+ "Go back and fix the name please.");
+					
+					return false;
+			}
+			else 
+					return true;
+		}
+		function chkPhone()
+		{
+			var phone = document.getElementById("ph");
+			//testing the format of the phone
+			//must be in ddd-ddd-dddd format
+			var phonePos = phone.value.search(/^\d{3}-\d{3}-\d{4}$/);
+			if(phonePos != 0)
+			{
+				alert("The phone number you entered (" + phone.value + ") is not in the correct form \n"
+				    + "The correct form is: nnn-nnn-nnnn. \n" + "Please go back and fix the phone number please");
+					
+					return false;
+			}
+			else 
+					return true;
+		}
+		
+		//event handlers for all button selections
+		//event handler for size selection
+		function scoopTotal()
+		{
+			var scoopTotals = 0;
+			var one;
+			var two;
+			var three;
+			
+			if(one = document.getElementById("small").checked)
+			{
+				scoopTotals += 2;
+			}
+			if(two = document.getElementById("med").checked)
+			{
+				scoopTotals += 3;
+			}
+			if(three = document.getElementById("large").checked)
+			{
+				scoopTotals += 4;
+			}
+			return scoopTotals;
+		}
+		function scoopChoice()
+		{
+			var size = "";
+			var one;
+			var two;
+			var three;
+			
+			if(one = document.getElementById("small").checked)
+			{
+				size += "One Scoop";
+			}
+			if(two = document.getElementById("med").checked)
+			{
+				size += "Two Scoops";
+			}
+			if(three = document.getElementById("large").checked)
+			{
+				size += "Three Scoops";
+			}
+			return size;
+		}
+		
+		//event handler for flavor selection
+		function flavorChoice ()
+		{
+			var flavor = "";
+			var vanilla;
+			var choc;
+			var strawberry;
+			
+			if(vanilla = document.getElementById("vanilla").checked)
+			{
+				flavor += "Vanilla";
+			}
+			if(choc = document.getElementById("choc").checked)
+			{
+				flavor += "Chocolate";
+			}
+			if(strawberry = document.getElementById("strawberry").checked)
+			{
+				flavor += "Strawberry";
+			}
+			return flavor;
+			/*var flavorSelection = document.getElementById("myForm");
+			//for loop to determine flavor
+			for(var index = 0; index < flavorSelection.flavor.length; index++)
+			{
+				if(flavorSelection.flavor[index].checked)
+				{
+					var flavor = flavorSelection.flavor[index].value;
+					break;
+				}
+			}
+			switch(flavor)
+			{
+				case "Vanilla":
+					flavorTotal = "Vanilla";
+					break;
+				case "Chocolate":
+					flavorTotal = "Chocolate";
+					break;
+				case "Strawberry":
+					flavorTotal = "Strawberry";
+					break;
+			}*/
+		}
+				
+		//event handler for cone selection
+		function coneChoice ()
+		{
+			var output = "";
+			var regular;
+			var waffle;
+			var cup;
+			
+				if(regualr = document.getElementById("regular").checked)
+				{
+					output += "Regular";
+				}
+				if(waffle = document.getElementById("waffle").checked)
+				{
+					output += "Waffle";
+				}
+				if(cup = document.getElementById("cup").checked)
+				{
+					output += "Cup";
+				}
+					
+			return output;		
+		}
+		function coneTotal()
+		{
+			var coneTotal = 0;
+			var waffle;
+			
+			if(waffle = document.getElementById("waffle").checked)
+			{
+				coneTotal += 0.50;
+			}
+			return coneTotal;
+		}
+		//event handler for topping selection
+		function toppingChoice ()
+		{
+			var output = "";
+			var chocSp;
+			var rainSp;
+			var oreoSp;
+			var heathBar;
+			var chocCh;
+			var reesesCh;
+			//brute force method to try to get toppings to work but it doesn't
+				if(chocSp = document.getElementById("chocSprinkles").checked)
+				{
+					output += "Chocolate Sprinkles, ";
+				}
+				if(rainSp = document.getElementById("mixSprinkles").checked)
+				{
+					output += "Rainbow Sprinkles, ";
+				}
+				if(oreoSp = document.getElementById("oreo").checked)
+				{
+					output += "Oreo Sprinkles, ";
+				}
+				if(HeathBar = document.getElementById("heath").checked)
+				{
+					output += "Heath Bar, ";
+				}
+				if(chocCh = document.getElementById("chocChips").checked)
+				{
+					output += "Chocolate Chips, ";
+				}
+				if(reesesCh = document.getElementById("reeses").checked)
+				{
+					output += "Reeses, ";
+				}
+				var rep = output.replace(/,(?=[^,]*$)/, ' ');
+				return rep;
+		}
+		
+		function toppingTotal()
+		{
+			var toppingTotaling = 0;
+			
+			if(chocSp = document.getElementById("chocSprinkles").checked)
+				{
+					toppingTotaling += 0.25;
+				}
+			if(rainSp = document.getElementById("mixSprinkles").checked)
+				{
+					toppingTotaling += 0.20;
+				}
+			if(oreoSp = document.getElementById("oreo").checked)
+				{
+					toppingTotaling += 0.30;
+				}
+			if(HeathBar = document.getElementById("heath").checked)
+				{
+					toppingTotaling += 0.50;
+				}
+			if(chocCh = document.getElementById("chocChips").checked)
+				{
+					toppingTotaling += 0.30;
+				}
+			if(reesesCh = document.getElementById("reeses").checked)
+				{
+					toppingTotaling += 0.50;
+				}
+				
+			return toppingTotaling;
+		}
+		
+		//event handler for computing total cost
+		function computeCost ()
+		{
+			if(chkName()&&chkPhone())
+			{
+				var scoopValue = scoopTotal();
+				var scoopSize = scoopChoice();
+				var flavorValue = flavorChoice();
+				var coneValue = coneChoice();
+				var coneTotals = coneTotal();
+				var toppingValues = toppingChoice();
+				var toppingTotals = toppingTotal();
+				var total = scoopValue + coneTotals + toppingTotals;
+				var name = document.getElementById("fn").value;
+				document.getElementById("outar").innerHTML += "Size: " + scoopSize + "<br />" + "Flavor: " + flavorValue + "<br />" + "Type: " + coneValue + "<br />" + "Toppings: " + toppingValues + "<br />" + "<br />" + "Order Total: $" + total.toFixed(2) + "<br />" + "Thank you " + name + "!";
+			}
+			
+		}
+		
+		
+		//event handler for clearing the form
+		function clear()
+		{
+			document.getElementById("outar").innerHTML += " ";
+		}
+ 
+</script>
+</head>
+<body>   
+   <form id = "myForm" action=""  >                     
+    <table>
+     <caption>Gillian's Home Style Ice Cream<br />
+              On-line Order Form </caption>
+     <tr>
+       <td colspan="3"> <span class = "red">1.</span>
+	   <label> Name: 
+           <input type="text" maxlength="10" name="fn" id="fn"  />
+           (all alphabetics max length 10)</label>
+       </td>
+       <th rowspan="12" id="outp"><h3>Order Summary</h3><p id="outar"></p></th>
+     </tr>
+     <tr>
+       <td colspan="3"> <span class = "red">2.</span> 
+	   <label> Phone #:  
+           <input type="text" maxlength="12" name="ph" id="ph"  />
+              Format: ddd-ddd-dddd </label>
+       </td>
+     </tr>
+	<tr>
+       <th colspan="3">
+            <span class = "red">3.</span>  Size: Select the size for your Ice Cream cone<br />
+       </th>   
+     </tr>
+     <tr>
+       <td><input type="radio" name="size" id="small" value="2" checked="checked"/>One Scoop - $2.00</td>
+       <td><input type="radio" name="size" id="med" value="3" />Two Scoops - $3.00</td>
+       <td><input type="radio" name="size" id="large" value="4" />Three Scoops - $4.00</td>
+     </tr>
+	 <tr>
+       <th colspan="3">
+           <span class = "red"> 4.</span>  Size: Select your flavor<br />
+       </th>   
+     </tr>
+     <tr>
+       <td><input type="radio" name="flavor" id="vanilla" value="Vanilla" checked="checked"/>Vanilla </td>
+       <td><input type="radio" name="flavor" id="choc" value="Chocolate" />Chocolate</td>
+       <td><input type="radio" name="flavor" id="strawberry" value="Strawberry" />Strawberry</td>
+     </tr>
+	 <tr>
+       <th colspan="3">
+            <span class = "red">5.</span>  Cone: Select the type of cone  <br />
+       </th>   
+     </tr>
+     <tr>
+       <td><input type="radio" name="cone" id="regular" value="Regular" checked="checked"/>Regular </td>
+       <td><input type="radio" name="cone" id="waffle" value="Waffle" />Waffle (extra $ .50)</td>
+       <td><input type="radio" name="cone" id="cup" value="Cup" />Cup</td>
+     </tr>
+	<tr>
+       <th colspan="3">
+           <span class = "red">6.</span>  Toppings: Select the toppings <br />
+       </th>
+     </tr>
+      <tr>
+        <td>
+           <input type="checkbox" name = "allToppings" id="chocSprinkles" value="Chocolate Sprinkles"  />Chocolate Sprinkles ($.25)
+        </td>
+        <td>
+          <input type="checkbox" name = "allToppings" id="mixSprinkles" value="Rainbow Sprinkles" />Rainbow Sprinkles ($0.20)
+        </td>
+        <td>    
+          <input type="checkbox" name = "allToppings" id="oreo" value="Oreo" />Oreo Sprinkles  ($.30)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name = "allToppings" id="heath" value="Heath Bar" />Heath Bar Sprinkles ($0.50)
+        </td>
+        <td>                                              
+           <input type="checkbox" name = "allToppings" id="chocChips" value="Chocolate Chips" />Chocolate Chips ($0.30)
+        </td>
+        <td>
+          <input type="checkbox" name = "allToppings" id="reeses" value="Reeses" />Reeses ($.50)
+        </td>
+     </tr>
+	<tr>
+       <th colspan="3">
+          <input type="button" id = "calculate" value="Calculate Order Price" onclick = "computeCost()" />
+          <input type="reset" value="Clear Form" onclick = "clear()" />
+       </th>
+     </tr>
+  </table>
+  
+</form>
+	<script type = "text/javascript" >
+
+		<!--registering the event handlers for the name and phone number-->
+		document.getElementById("fn").onchange = chkName;
+		document.getElementById("ph").onchange = chkPhone;
+		<!--registering the event handler for scoopChoice-->
+		document.getElementById("small").onclick = scoopChoice;
+		document.getElementById("med").onclick = scoopChoice;
+		document.getElementById("large").onclick = scoopChoice;
+		<!--registering the event handler for flavorChoice-->
+		document.getElementById("vanilla").onclick = flavorChoice;
+		document.getElementById("choc").onclick = flavorChoice;
+		document.getElementById("strawberry").onclick = flavorChoice;
+		<!--registering the event handler for coneChoice-->
+		document.getElementById("regular").onclick = coneChoice;
+		document.getElementById("waffle").onclick = coneChoice;
+		document.getElementById("cup").onclick = coneChoice;
+		<!--registering the event for toppingChoice-->
+		document.getElementById("chocSprinkles").onclick = toppingChoice;
+		document.getElementById("mixSprinkles").onclick = toppingChoice;
+		document.getElementById("oreo").onclick = toppingChoice;
+		document.getElementById("heath").onclick = toppingChoice;
+		document.getElementById("chocChips").onclick = toppingChoice;
+		document.getElementById("reeses").onclick = toppingChoice;
+	</script>		
+</body>
+</html>
+	
